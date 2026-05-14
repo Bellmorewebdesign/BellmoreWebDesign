@@ -172,6 +172,17 @@ echo "bellmorewebdesign.com" > docs/CNAME
 
 4. Commit and push the CNAME file
 
+### Troubleshooting
+
+**If the live site shows README.md instead of your website:**
+
+GitHub Pages is publishing from the wrong folder. Go to **Settings > Pages** and set:
+- **Source**: Deploy from a branch
+- **Branch**: main
+- **Folder**: /docs
+
+Click **Save** and wait a few minutes for the site to redeploy.
+
 ### Important Notes
 
 - The static site is served from `/docs`, not from the repo root

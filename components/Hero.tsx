@@ -17,56 +17,56 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-blue-50 to-white">
+    <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FAF7F0] via-[#FFFDF7] to-[#FAF7F0]">
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column */}
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Clean Websites for Local Businesses That Need More Than a Facebook Page
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1E2A38] mb-6 leading-tight">
+              Simple Websites for Local Businesses That Need More Than a Facebook Page
             </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Bellmore Web Design helps local businesses turn their services, photos, reviews, and contact info into simple mobile-friendly websites that customers can actually use.
+            <p className="text-xl text-[#5F6B73] mb-8 leading-relaxed">
+              Bellmore Web Design helps small businesses turn their services, photos, reviews, and contact info into a clean website customers can actually use.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <button
                 onClick={() => scrollToSection('contact')}
-                className="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
+                className="bg-[#6FA8DC] text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-[#5a8ec4] transition-all shadow-md hover:shadow-lg"
               >
                 Get a Free Homepage Mockup
               </button>
               <button
                 onClick={() => scrollToSection('work')}
-                className="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-colors border-2 border-blue-600"
+                className="bg-white text-[#6FA8DC] px-8 py-4 rounded-xl text-lg font-semibold hover:bg-[#FFFDF7] transition-all border-2 border-[#6FA8DC]"
               >
-                View Sample Work
+                See Sample Sites
               </button>
             </div>
             {/* Trust Points */}
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div className="flex items-center">
-                <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#A8C3A0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-700">Built for local businesses</span>
+                <span className="text-[#5F6B73]">Built for local businesses</span>
               </div>
               <div className="flex items-center">
-                <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#A8C3A0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-700">Mobile-friendly design</span>
+                <span className="text-[#5F6B73]">Mobile-friendly design</span>
               </div>
               <div className="flex items-center">
-                <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#A8C3A0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-700">Free homepage mockups</span>
+                <span className="text-[#5F6B73]">Free homepage mockups</span>
               </div>
               <div className="flex items-center">
-                <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-[#A8C3A0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-gray-700">Based in Bellmore, NY</span>
+                <span className="text-[#5F6B73]">Based in Bellmore, NY</span>
               </div>
             </div>
           </div>

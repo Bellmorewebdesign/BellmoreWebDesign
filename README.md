@@ -1,30 +1,29 @@
 # Bellmore Web Design
 
-A modern, mobile-friendly website for Bellmore Web Design, showcasing web design services for local businesses.
+A modern, mobile-friendly website for Bellmore Web Design, showcasing web design services for local businesses. Configured for **static export** and **GitHub Pages deployment**.
 
 ## Tech Stack
 
-- **Next.js 15** with App Router
+- **Next.js 16** with App Router and Static Export
 - **TypeScript**
-- **Tailwind CSS**
-- **Nodemailer** for email contact form
+- **Tailwind CSS 4**
 - Fully responsive mobile-first design
+- Warm, local business color palette
 
 ## Features
 
-- Clean, professional homepage with multiple sections
-- Working contact form with backend API
-- Email notifications for new leads
-- Rate limiting to prevent spam
-- Honeypot field for bot protection
-- Three fully-built sample concept websites:
-  - Exterior Cleaning business
-  - Restaurant/food business
-  - Pet care business
+- Clean, professional homepage with warm, friendly design
+- Contact form using `mailto:` (GitHub Pages compatible)
+- Three fully-redesigned sample concept websites:
+  - **South Shore Shine** - Pressure washing (water-inspired theme)
+  - **Main Street Chicken Co.** - Restaurant (bold, food-focused theme)
+  - **Harbor Paws Pet Care** - Pet care (calm, trustworthy theme)
 - SEO optimized with proper metadata
 - Sitemap and robots.txt
 - Smooth scrolling navigation
 - Mobile-friendly header with hamburger menu
+- Warm color palette (cream, sage green, soft blue, warm tan)
+- GitHub Actions workflow for automatic deployment
 
 ## Getting Started
 
@@ -126,31 +125,122 @@ Each sample site:
 - Is fully mobile-responsive
 - Uses realistic business copy (no lorem ipsum)
 
-## Deployment
+## GitHub Pages Deployment
 
-### Vercel (Recommended)
+This site is configured for **static export** to work with GitHub Pages. Here's everything you need to know:
+
+### How It Works
+
+The site is built as a static Next.js export that generates plain HTML, CSS, and JavaScript files that GitHub Pages can serve.
+
+**Important:** GitHub Pages is a **static hosting** service. It cannot:
+- Run backend API routes (like `/api/contact`)
+- Execute server-side code
+- Use dynamic server features
+
+That's why the contact form uses `mailto:` instead of a backend API route for the GitHub Pages version.
+
+### What Gets Deployed
+
+1. When you push to the `main` branch, GitHub Actions automatically:
+   - Installs dependencies
+   - Runs `npm run build` to create a static export
+   - Deploys the `out/` folder to GitHub Pages
+
+2. The built site includes:
+   - `index.html` at the root
+   - All pages as static HTML files
+   - CSS and JavaScript bundles
+   - Image assets
+
+### Repository Setup
+
+**Make sure your GitHub repository is configured correctly:**
+
+1. **Go to Settings > Pages** in your GitHub repository
+
+2. **Set Source to:**
+   - Source: **GitHub Actions** (not "Deploy from a branch")
+
+3. **The site will be available at:**
+   - `https://[username].github.io/BellmoreWebDesign/`
+
+4. **Base path configuration:**
+   - The `next.config.ts` file is already configured with:
+     ```typescript
+     basePath: process.env.NODE_ENV === 'production' ? '/BellmoreWebDesign' : '',
+     assetPrefix: process.env.NODE_ENV === 'production' ? '/BellmoreWebDesign/' : '',
+     ```
+   - If your repository has a different name, update these paths in `next.config.ts`
+
+### Manual Build (Optional)
+
+To build and test locally before deploying:
+
+```bash
+# Install dependencies
+npm install
+
+# Build the static site
+npm run build
+
+# The output will be in the `out/` folder
+# You can serve it locally to test:
+npx serve out
+```
+
+### Fixing the "File not found" Error
+
+If you see "File not found" on GitHub Pages, check:
+
+1. **Is the repo configured correctly?**
+   - Go to Settings > Pages > Source: **GitHub Actions**
+
+2. **Did the workflow run?**
+   - Go to Actions tab
+   - Make sure the latest deploy succeeded
+
+3. **Is index.html at the root?**
+   - After the workflow runs, check the deployment
+   - The `out/` folder should have `index.html` at the root
+
+4. **Is the base path correct?**
+   - If your repo name is NOT `BellmoreWebDesign`, update `next.config.ts`:
+     ```typescript
+     basePath: '/your-repo-name',
+     assetPrefix: '/your-repo-name/',
+     ```
+
+### Contact Form on GitHub Pages
+
+The contact form uses `mailto:bellmorewebdesign@gmail.com` which opens the user's email client with pre-filled information. This works on GitHub Pages because it doesn't require a backend server.
+
+**The form does NOT:**
+- Submit to `/api/contact` (that route doesn't exist in static export)
+- Send emails from the server
+- Require SMTP configuration
+
+**The form DOES:**
+- Open the user's email app (Gmail, Outlook, Apple Mail, etc.)
+- Pre-fill the email body with the form data
+- Work on all devices
+
+### Other Deployment Options
+
+If you need a backend API (server-side features), deploy to:
+
+#### Vercel (Recommended for Full Features)
 
 1. Push your code to GitHub
 2. Import your repository to Vercel
-3. Add environment variables in Vercel dashboard:
-   - `SMTP_HOST`
-   - `SMTP_PORT`
-   - `SMTP_USER`
-   - `SMTP_PASS`
-   - `CONTACT_TO_EMAIL`
-   - `CONTACT_FROM_EMAIL`
+3. Add environment variables in Vercel dashboard
 4. Deploy
 
-### Other Hosting
+Vercel supports the full Next.js API routes and server features.
 
-The site can be deployed to any platform that supports Next.js:
-- Netlify
-- Railway
-- DigitalOcean
-- AWS
-- Google Cloud
+#### Netlify, Railway, DigitalOcean, AWS, Google Cloud
 
-Make sure to:
+These platforms also support Next.js with API routes. Make sure to:
 1. Set environment variables on your hosting platform
 2. Build the project with `npm run build`
 3. Configure the hosting to run `npm start`

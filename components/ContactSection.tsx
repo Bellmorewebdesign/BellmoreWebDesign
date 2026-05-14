@@ -8,23 +8,62 @@ export default function ContactSection() {
     businessName: '',
     contact: '',
     currentLink: '',
-    message: ''
+    message: '',
+    companyWebsite: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    
-    const emailBody = `Name: ${formData.name}
-Business Name: ${formData.businessName}
-Phone or Email: ${formData.contact}
-Current Link: ${formData.currentLink || 'Not provided'}
+    setIsLoading(true);
+    setStatusMessage(null);
 
-Message:
-${formData.message}`;
+    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-    const mailtoLink = `mailto:bellmorewebdesign@gmail.com?subject=Free Homepage Mockup Request - ${formData.businessName}&body=${encodeURIComponent(emailBody)}`;
-    
-    window.location.href = mailtoLink;
+    if (!apiBaseUrl) {
+      console.error('NEXT_PUBLIC_API_BASE_URL is not set. Please add it to your .env file.');
+      setStatusMessage({ 
+        type: 'error', 
+        text: 'Configuration error. Please contact bellmorewebdesign@gmail.com directly.' 
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatusMessage({ type: 'success', text: data.message || 'Thank you! We will get back to you soon.' });
+        setFormData({
+          name: '',
+          businessName: '',
+          contact: '',
+          currentLink: '',
+          message: '',
+          companyWebsite: ''
+        });
+      } else {
+        setStatusMessage({ type: 'error', text: data.error || 'Something went wrong. Please try again.' });
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setStatusMessage({ 
+        type: 'error', 
+        text: 'Unable to send message. Please email us at bellmorewebdesign@gmail.com.' 
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -112,15 +151,32 @@ ${formData.message}`;
                 />
               </div>
 
+              <input
+                type="text"
+                name="companyWebsite"
+                value={formData.companyWebsite}
+                onChange={(e) => setFormData({ ...formData, companyWebsite: e.target.value })}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
+              {statusMessage && (
+                <div className={`p-4 rounded-xl ${statusMessage.type === 'success' ? 'bg-[#A8C3A0]/20 text-[#4a6b47]' : 'bg-red-100 text-red-700'}`}>
+                  {statusMessage.text}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-[#6FA8DC] text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-[#5a8ec4] transition-colors shadow-md hover:shadow-lg"
+                disabled={isLoading}
+                className="w-full bg-[#6FA8DC] text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-[#5a8ec4] transition-colors shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Email
+                {isLoading ? 'Sending...' : 'Send Message'}
               </button>
 
               <p className="text-sm text-[#5F6B73] text-center">
-                This will open your email app with the details filled in.
+                We'll get back to you within 24 hours.
               </p>
             </form>
           </div>

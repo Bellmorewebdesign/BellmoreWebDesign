@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy:branch": "npm run build && echo. > docs\\.nojekyll && echo Built static site into /docs. Commit and push to main, then set GitHub Pages to main branch /docs."
   },
   "dependencies": {
     "next": "16.2.6",

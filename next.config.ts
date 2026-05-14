@@ -5,8 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/BellmoreWebDesign' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/BellmoreWebDesign/' : '',
+  distDir: "docs",
+  basePath: "",
+  assetPrefix: "",
 };
 
 export default nextConfig;

@@ -13,7 +13,7 @@ export default function SampleSitesSection() {
       title: 'Main Street Chicken Co.',
       description: 'Restaurant sample. Bold, food-focused design with warm colors and menu showcase.',
       link: '/sample-sites/restaurant',
-      color: 'from-[#DC143C] to-[#8B0000]',
+      color: 'from-[#8B1E1E] to-[#6D1616]',
       icon: '🍗'
     },
     {
@@ -22,6 +22,13 @@ export default function SampleSitesSection() {
       link: '/sample-sites/pet-care',
       color: 'from-[#8FBC8F] to-[#6B8E6B]',
       icon: '🐕'
+    },
+    {
+      title: 'Ever After Events',
+      description: 'Event planning sample. Soft, elegant design with romantic colors and showcase layouts.',
+      link: '/sample-sites/events',
+      color: 'from-[#E6B8D0] to-[#D4A5C3]',
+      icon: '🎈'
     }
   ];
 
@@ -36,7 +43,7 @@ export default function SampleSitesSection() {
             I created sample concepts for different industries so you can see what a professional website could look like for your business. Each one has a different design style and personality.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {sampleSites.map((site, index) => (
             <Link key={index} href={site.link} className="group">
               <div className="bg-[#FFFDF7] rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden border border-[#E8DED0] hover:scale-105">

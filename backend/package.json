@@ -1,0 +1,20 @@
+{
+  "name": "bellmore-web-design-backend",
+  "version": "1.0.0",
+  "description": "Backend API for Bellmore Web Design contact form",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": ["express", "api", "contact-form"],
+  "author": "Bellmore Web Design",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "nodemailer": "^6.9.7",
+    "dotenv": "^16.3.1",
+    "express-rate-limit": "^7.1.5"
+  }
+}

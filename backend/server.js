@@ -1,7 +1,6 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
@@ -9,7 +8,7 @@ const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',')
-  : ['http://localhost:5173', 'http://localhost:3000'];
+  : ['http://localhost:5173', 'http://localhost:3000', 'https://bellmorewebdesign.com'];
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -33,84 +32,130 @@ const contactLimiter = rateLimit({
 });
 
 app.get('/health', (req, res) => {
-  res.json({ ok: true, service: 'bellmore-web-design-backend' });
+  res.json({ ok: true, service: 'Bellmore Web Design backend', port: PORT });
 });
+
+function escapeHtml(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+async function sendTelegramMessage(text) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    console.error('Telegram credentials missing. TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID are required.');
+    throw new Error('Telegram not configured');
+  }
+
+  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+  
+  console.log('Sending Telegram message to chat ID:', chatId);
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: text,
+      parse_mode: 'HTML',
+    }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.text();
+    console.error('Telegram API error:', response.status, errorData);
+    throw new Error(`Telegram API returned ${response.status}`);
+  }
+
+  const data = await response.json();
+  console.log('Telegram message sent successfully');
+  return data;
+}
 
 app.post('/api/contact', contactLimiter, async (req, res) => {
   try {
     const { name, businessName, contact, currentLink, message, companyWebsite } = req.body;
 
+    console.log('Received contact form submission:', { name, businessName, contact: contact?.substring(0, 10) + '...' });
+
+    // Honeypot field check
     if (companyWebsite) {
-      return res.json({ success: true, message: 'Thank you for your submission!' });
+      console.log('Honeypot field triggered - potential bot');
+      return res.json({ ok: true, message: 'Thank you for your submission!' });
     }
 
+    // Validate required fields
     if (!name || !businessName || !contact || !message) {
+      console.log('Validation failed: missing required fields');
       return res.status(400).json({ 
+        ok: false,
         error: 'Missing required fields: name, businessName, contact, and message are required.' 
       });
     }
 
     if (typeof name !== 'string' || name.trim().length === 0) {
-      return res.status(400).json({ error: 'Name is required and must be a valid string.' });
+      return res.status(400).json({ ok: false, error: 'Name is required and must be a valid string.' });
     }
 
     if (typeof businessName !== 'string' || businessName.trim().length === 0) {
-      return res.status(400).json({ error: 'Business name is required and must be a valid string.' });
+      return res.status(400).json({ ok: false, error: 'Business name is required and must be a valid string.' });
     }
 
     if (typeof contact !== 'string' || contact.trim().length === 0) {
-      return res.status(400).json({ error: 'Contact information is required and must be a valid string.' });
+      return res.status(400).json({ ok: false, error: 'Contact information is required and must be a valid string.' });
     }
 
     if (typeof message !== 'string' || message.trim().length < 10) {
-      return res.status(400).json({ error: 'Message must be at least 10 characters long.' });
+      return res.status(400).json({ ok: false, error: 'Message must be at least 10 characters long.' });
     }
 
     if (message.trim().length > 2000) {
-      return res.status(400).json({ error: 'Message cannot exceed 2000 characters.' });
+      return res.status(400).json({ ok: false, error: 'Message cannot exceed 2000 characters.' });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    // Format Telegram message
+    const telegramMessage = `🚨 <b>New Bellmore Web Design Lead</b>
 
-    const emailContent = `
-New Contact Form Submission from Bellmore Web Design
+<b>Name:</b> ${escapeHtml(name.trim())}
+<b>Business:</b> ${escapeHtml(businessName.trim())}
+<b>Contact:</b> ${escapeHtml(contact.trim())}
+<b>Current Website:</b> ${currentLink ? escapeHtml(currentLink.trim()) : 'Not provided'}
 
-Name: ${name.trim()}
-Business Name: ${businessName.trim()}
-Contact: ${contact.trim()}
-Current Website: ${currentLink ? currentLink.trim() : 'Not provided'}
+<b>Message:</b>
+${escapeHtml(message.trim())}
 
-Message:
-${message.trim()}
+<i>Submitted at: ${new Date().toLocaleString()}</i>`;
 
----
-Submitted at: ${new Date().toLocaleString()}
-    `;
+    // Send Telegram message
+    await sendTelegramMessage(telegramMessage);
 
-    await transporter.sendMail({
-      from: process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER,
-      to: process.env.CONTACT_TO_EMAIL || 'bellmorewebdesign@gmail.com',
-      subject: `New Lead: ${businessName.trim()}`,
-      text: emailContent,
-    });
-
+    console.log('Contact form processed successfully');
     res.json({ 
-      success: true, 
-      message: 'Thank you for reaching out! We will get back to you within 24 hours.' 
+      ok: true, 
+      message: 'Thanks. Your message was sent.' 
     });
 
   } catch (error) {
-    console.error('Error processing contact form:', error);
+    console.error('Error processing contact form:', error.message);
+    
+    if (error.message === 'Telegram not configured') {
+      return res.status(500).json({ 
+        ok: false,
+        error: 'Contact form is not configured. Please email us directly at bellmorewebdesign@gmail.com.' 
+      });
+    }
+
     res.status(500).json({ 
-      error: 'Failed to send your message. Please try again or email us directly at bellmorewebdesign@gmail.com.' 
+      ok: false,
+      error: 'Something went wrong while sending your message.' 
     });
   }
 });

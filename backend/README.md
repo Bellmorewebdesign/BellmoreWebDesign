@@ -6,7 +6,7 @@ Backend API server for handling contact form submissions from the Bellmore Web D
 
 - Express.js REST API
 - Contact form endpoint with validation
-- Nodemailer for email notifications
+- Telegram Bot integration for instant notifications
 - Rate limiting (5 submissions per 10 minutes per IP)
 - Honeypot field for bot protection
 - CORS protection
@@ -15,7 +15,7 @@ Backend API server for handling contact form submissions from the Bellmore Web D
 ## Requirements
 
 - Node.js 18 or higher
-- SMTP credentials (Gmail, SendGrid, or any SMTP service)
+- Telegram Bot token and Chat ID
 
 ## Local Development Setup
 
@@ -47,14 +47,23 @@ Required environment variables:
 
 ```
 PORT=4000
-ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-CONTACT_TO_EMAIL=bellmorewebdesign@gmail.com
-CONTACT_FROM_EMAIL=website@bellmorewebdesign.com
+ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000,https://bellmorewebdesign.com
+TELEGRAM_BOT_TOKEN=your-bot-token-here
+TELEGRAM_CHAT_ID=your-chat-id-here
 ```
+
+### Getting Telegram Credentials
+
+1. **Create a Telegram Bot:**
+   - Open Telegram and search for `@BotFather`
+   - Send `/newbot` and follow the prompts
+   - Copy the bot token provided
+
+2. **Get Your Chat ID:**
+   - Search for `@userinfobot` on Telegram
+   - Send `/start`
+   - Copy your chat ID
+   - OR start a chat with your bot and visit: `https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates`
 
 5. Start the development server:
 
@@ -73,7 +82,7 @@ curl http://localhost:4000/health
 Expected response:
 
 ```json
-{"ok":true,"service":"bellmore-web-design-backend"}
+{"ok":true,"service":"Bellmore Web Design backend","port":4000}
 ```
 
 7. Test the contact endpoint:
@@ -87,7 +96,7 @@ curl -X POST http://localhost:4000/api/contact \
 Expected response:
 
 ```json
-{"success":true,"message":"Thank you for reaching out! We will get back to you within 24 hours."}
+{"ok":true,"message":"Thanks. Your message was sent."}
 ```
 
 ## Production Deployment (Home Server with PM2)
@@ -119,13 +128,9 @@ Update with production values:
 
 ```
 PORT=4000
-ALLOWED_ORIGINS=https://YOUR-GITHUB-PAGES-URL.github.io,https://bellmorewebdesign.com
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your-email@gmail.com
-SMTP_PASS=your-app-password
-CONTACT_TO_EMAIL=bellmorewebdesign@gmail.com
-CONTACT_FROM_EMAIL=website@bellmorewebdesign.com
+ALLOWED_ORIGINS=https://bellmorewebdesign.com
+TELEGRAM_BOT_TOKEN=your-bot-token-here
+TELEGRAM_CHAT_ID=your-chat-id-here
 ```
 
 4. Install PM2 globally (if not already installed):
@@ -249,19 +254,7 @@ server {
 
 ## Frontend Configuration
 
-Update your frontend `.env` file to point to the backend:
-
-```
-VITE_API_BASE_URL=https://your-backend-domain.com
-```
-
-Or for local development:
-
-```
-VITE_API_BASE_URL=http://localhost:4000
-```
-
-The contact form will submit to `${VITE_API_BASE_URL}/api/contact`.
+The frontend contact form submits to the relative path `/api/contact`, which is proxied by Nginx to `http://localhost:4000/api/contact`. No environment variables are needed for the API URL.
 
 ## API Endpoints
 
@@ -274,7 +267,8 @@ Health check endpoint.
 ```json
 {
   "ok": true,
-  "service": "bellmore-web-design-backend"
+  "service": "Bellmore Web Design backend",
+  "port": 4000
 }
 ```
 
@@ -311,16 +305,25 @@ Submit a contact form.
 
 ```json
 {
-  "success": true,
-  "message": "Thank you for reaching out! We will get back to you within 24 hours."
+  "ok": true,
+  "message": "Thanks. Your message was sent."
 }
 ```
 
 **Error responses:**
 
+All errors return JSON with `ok: false` and an `error` message:
+
+```json
+{
+  "ok": false,
+  "error": "Error message here"
+}
+```
+
 - 400: Validation error
 - 429: Rate limit exceeded
-- 500: Server error
+- 500: Server error (Telegram API failure or configuration issue)
 
 ## Security Features
 
@@ -330,18 +333,30 @@ Submit a contact form.
 - **CORS protection**: Only allowed origins can call the API
 - **Environment variables**: Sensitive data stored in `.env`
 
-## Gmail SMTP Setup
+## Telegram Setup Guide
 
-If using Gmail:
+### Step 1: Create a Telegram Bot
 
-1. Go to your Google Account settings
-2. Enable 2-factor authentication
-3. Generate an App Password:
-   - Go to Security > 2-Step Verification > App passwords
-   - Create a new app password for "Mail"
-4. Use this app password in your `.env` file as `SMTP_PASS`
+1. Open Telegram and search for `@BotFather`
+2. Send `/newbot` command
+3. Choose a name for your bot (e.g., "Bellmore Web Design Contact")
+4. Choose a username for your bot (must end in 'bot', e.g., "bellmore_contact_bot")
+5. Copy the bot token provided (looks like: `1234567890:ABCdefGHIjklMNOpqrsTUVwxyz`)
+6. Save this as `TELEGRAM_BOT_TOKEN` in your `.env` file
 
-**Note:** Regular Gmail passwords won't work; you must use an app password.
+### Step 2: Get Your Chat ID
+
+1. Search for `@userinfobot` on Telegram
+2. Send `/start` command
+3. The bot will reply with your user info, including your Chat ID
+4. Copy the Chat ID number
+5. Save this as `TELEGRAM_CHAT_ID` in your `.env` file
+
+### Step 3: Start Your Bot
+
+1. Search for your bot by username on Telegram
+2. Send `/start` to activate the bot
+3. Your bot is now ready to send you messages!
 
 ## Troubleshooting
 
@@ -351,17 +366,17 @@ If using Gmail:
 - Make sure port 4000 is not already in use: `lsof -i :4000` (macOS/Linux) or `netstat -ano | findstr :4000` (Windows)
 - Check Node.js version: `node --version` (should be 18+)
 
-### Emails not sending
+### Telegram messages not sending
 
-- Verify SMTP credentials in `.env`
-- Check SMTP host and port
-- If using Gmail, make sure you're using an app password, not your regular password
-- Check server logs: `pm2 logs bellmore-web-backend`
+- Verify `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` in `.env`
+- Make sure you've sent `/start` to your bot on Telegram
+- Test the bot token with: `curl https://api.telegram.org/bot<YOUR_TOKEN>/getMe`
+- Check server logs: `pm2 logs bellmore-backend`
 
 ### CORS errors
 
 - Add your frontend URL to `ALLOWED_ORIGINS` in `.env`
-- Restart the backend: `pm2 restart bellmore-web-backend`
+- Restart the backend: `pm2 restart bellmore-backend`
 - Make sure the origin includes the protocol (http:// or https://)
 
 ### Rate limit errors

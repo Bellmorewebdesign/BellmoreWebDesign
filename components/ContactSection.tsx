@@ -19,20 +19,8 @@ export default function ContactSection() {
     setIsLoading(true);
     setStatusMessage(null);
 
-    const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-    if (!apiBaseUrl) {
-      console.error('NEXT_PUBLIC_API_BASE_URL is not set. Please add it to your .env file.');
-      setStatusMessage({ 
-        type: 'error', 
-        text: 'Configuration error. Please contact bellmorewebdesign@gmail.com directly.' 
-      });
-      setIsLoading(false);
-      return;
-    }
-
     try {
-      const response = await fetch(`${apiBaseUrl}/api/contact`, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

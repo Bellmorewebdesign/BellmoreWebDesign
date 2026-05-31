@@ -66,7 +66,7 @@ export default function Hero() {
                 <svg className="w-5 h-5 text-[#A8C3A0] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
-                <span className="text-[#5F6B73]">Based in Bellmore, NY</span>
+                <span className="text-[#5F6B73]">Nassau County, NY — serving all of NY</span>
               </div>
             </div>
           </div>

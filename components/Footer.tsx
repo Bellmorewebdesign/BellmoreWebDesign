@@ -11,7 +11,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-2">Bellmore Web Design</h3>
             <p className="text-gray-400 text-sm">Clean websites for local businesses</p>
-            <p className="text-gray-400 text-sm mt-2">Bellmore, NY</p>
+            <p className="text-gray-400 text-sm mt-2">Located in Nassau County, NY — serving all of NY</p>
+            <p className="text-gray-400 text-sm mt-2">
+              <a href="tel:+15167252774" className="hover:text-white transition-colors">516 725 2774</a>
+            </p>
           </div>
 
           {/* Quick Links */}

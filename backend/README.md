@@ -1,12 +1,12 @@
 # Bellmore Web Design Backend
 
-Backend API server for handling contact form submissions from the Bellmore Web Design website.
+Backend API server for handling contact form submissions from the Bellmore Web Design website. Notifications are sent to Telegram only — there is no email sending of any kind.
 
 ## Features
 
 - Express.js REST API
 - Contact form endpoint with validation
-- Telegram Bot integration for instant notifications
+- Telegram Bot integration for instant notifications (no email)
 - Rate limiting (5 submissions per 10 minutes per IP)
 - Honeypot field for bot protection
 - CORS protection
@@ -90,7 +90,7 @@ Expected response:
 ```bash
 curl -X POST http://localhost:4000/api/contact \
   -H "Content-Type: application/json" \
-  -d '{"name":"Test User","businessName":"Test Business","contact":"test@example.com","currentLink":"https://example.com","message":"This is a test message from the contact form.","companyWebsite":""}'
+  -d '{"name":"Test User","email":"test@example.com","message":"This is a test message from the contact form."}'
 ```
 
 Expected response:
@@ -279,25 +279,32 @@ Submit a contact form.
 **Required fields:**
 
 - `name` (string): Contact person's name
-- `businessName` (string): Business name
-- `contact` (string): Email or phone number
-- `message` (string): Message (10-2000 characters)
+- `email` (string): Valid email address
+- `message` (string): Message
 
 **Optional fields:**
 
-- `currentLink` (string): Current website URL
-- `companyWebsite` (string): Honeypot field (should be empty)
+- `phone` (string)
+- `business` (string)
+- `website` (string)
+- `service` (string)
+- `budget` (string)
+- `timeline` (string)
+
+**Honeypot fields (leave empty):**
+
+- `company`, `honeypot`, or `_gotcha`. If any is filled, the request returns success without sending a Telegram message.
 
 **Request example:**
 
 ```json
 {
   "name": "John Doe",
-  "businessName": "John's Plumbing",
-  "contact": "john@example.com",
-  "currentLink": "https://example.com",
-  "message": "I need a new website for my plumbing business.",
-  "companyWebsite": ""
+  "email": "john@example.com",
+  "phone": "516 555 0123",
+  "business": "John's Plumbing",
+  "website": "https://example.com",
+  "message": "I need a new website for my plumbing business."
 }
 ```
 
@@ -328,7 +335,7 @@ All errors return JSON with `ok: false` and an `error` message:
 ## Security Features
 
 - **Rate limiting**: 5 submissions per 10 minutes per IP address
-- **Honeypot field**: `companyWebsite` field blocks bots
+- **Honeypot fields**: `company`, `honeypot`, and `_gotcha` fields block bots
 - **Input validation**: All fields are validated
 - **CORS protection**: Only allowed origins can call the API
 - **Environment variables**: Sensitive data stored in `.env`
@@ -387,5 +394,5 @@ All errors return JSON with `ok: false` and an `error` message:
 ## Contact
 
 For questions or support:
-- Email: bellmorewebdesign@gmail.com
-- Website: https://bellmorewebdesign.com
+- Phone: 516 725 2774
+- Website: BellmoreWebDesign.com (https://bellmorewebdesign.com)

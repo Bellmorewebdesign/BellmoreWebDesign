@@ -5,14 +5,17 @@ import { useState, FormEvent } from 'react';
 export default function ContactSection() {
   const [formData, setFormData] = useState({
     name: '',
-    businessName: '',
-    contact: '',
-    currentLink: '',
+    email: '',
+    phone: '',
+    business: '',
+    website: '',
     message: '',
-    companyWebsite: ''
+    company: ''
   });
   const [isLoading, setIsLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+  const GENERIC_ERROR = 'Something went wrong. Please try again or contact me directly.';
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -28,27 +31,33 @@ export default function ContactSection() {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      // The endpoint should always return JSON, but if Nginx/the server
+      // returns an HTML error page (e.g. a 404), parsing will throw.
+      // Handle that gracefully instead of crashing with "Unexpected token '<'".
+      let data: { ok?: boolean; message?: string; error?: string } | null = null;
+      try {
+        data = await response.json();
+      } catch {
+        data = null;
+      }
 
-      if (response.ok) {
-        setStatusMessage({ type: 'success', text: data.message || 'Thank you! We will get back to you soon.' });
+      if (response.ok && data) {
+        setStatusMessage({ type: 'success', text: data.message || 'Thanks. Your message was sent.' });
         setFormData({
           name: '',
-          businessName: '',
-          contact: '',
-          currentLink: '',
+          email: '',
+          phone: '',
+          business: '',
+          website: '',
           message: '',
-          companyWebsite: ''
+          company: ''
         });
       } else {
-        setStatusMessage({ type: 'error', text: data.error || 'Something went wrong. Please try again.' });
+        setStatusMessage({ type: 'error', text: (data && data.error) || GENERIC_ERROR });
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setStatusMessage({ 
-        type: 'error', 
-        text: 'Unable to send message. Please email us at bellmorewebdesign@gmail.com.' 
-      });
+      setStatusMessage({ type: 'error', text: GENERIC_ERROR });
     } finally {
       setIsLoading(false);
     }
@@ -85,42 +94,54 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="businessName" className="block text-sm font-semibold text-[#1E2A38] mb-2">
-                  Business Name *
+                <label htmlFor="email" className="block text-sm font-semibold text-[#1E2A38] mb-2">
+                  Email *
                 </label>
                 <input
-                  type="text"
-                  id="businessName"
+                  type="email"
+                  id="email"
                   required
-                  value={formData.businessName}
-                  onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-4 py-3 border border-[#E8DED0] rounded-xl focus:ring-2 focus:ring-[#6FA8DC] focus:border-transparent bg-[#FAF7F0]"
                 />
               </div>
 
               <div>
-                <label htmlFor="contact" className="block text-sm font-semibold text-[#1E2A38] mb-2">
-                  Phone or Email *
+                <label htmlFor="phone" className="block text-sm font-semibold text-[#1E2A38] mb-2">
+                  Phone
                 </label>
                 <input
-                  type="text"
-                  id="contact"
-                  required
-                  value={formData.contact}
-                  onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                  type="tel"
+                  id="phone"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full px-4 py-3 border border-[#E8DED0] rounded-xl focus:ring-2 focus:ring-[#6FA8DC] focus:border-transparent bg-[#FAF7F0]"
                 />
               </div>
 
               <div>
-                <label htmlFor="currentLink" className="block text-sm font-semibold text-[#1E2A38] mb-2">
+                <label htmlFor="business" className="block text-sm font-semibold text-[#1E2A38] mb-2">
+                  Business Name
+                </label>
+                <input
+                  type="text"
+                  id="business"
+                  value={formData.business}
+                  onChange={(e) => setFormData({ ...formData, business: e.target.value })}
+                  className="w-full px-4 py-3 border border-[#E8DED0] rounded-xl focus:ring-2 focus:ring-[#6FA8DC] focus:border-transparent bg-[#FAF7F0]"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="website" className="block text-sm font-semibold text-[#1E2A38] mb-2">
                   Current Facebook, Instagram, or Website Link
                 </label>
                 <input
                   type="text"
-                  id="currentLink"
-                  value={formData.currentLink}
-                  onChange={(e) => setFormData({ ...formData, currentLink: e.target.value })}
+                  id="website"
+                  value={formData.website}
+                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                   className="w-full px-4 py-3 border border-[#E8DED0] rounded-xl focus:ring-2 focus:ring-[#6FA8DC] focus:border-transparent bg-[#FAF7F0]"
                 />
               </div>
@@ -141,12 +162,13 @@ export default function ContactSection() {
 
               <input
                 type="text"
-                name="companyWebsite"
-                value={formData.companyWebsite}
-                onChange={(e) => setFormData({ ...formData, companyWebsite: e.target.value })}
+                name="company"
+                value={formData.company}
+                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                 className="hidden"
                 tabIndex={-1}
                 autoComplete="off"
+                aria-hidden="true"
               />
 
               {statusMessage && (
@@ -179,22 +201,14 @@ export default function ContactSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span>Bellmore, NY</span>
-                </div>
-                <div className="flex items-start">
-                  <svg className="w-6 h-6 text-[#6FA8DC] mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <a href="mailto:bellmorewebdesign@gmail.com" className="hover:text-[#6FA8DC] transition-colors">
-                    bellmorewebdesign@gmail.com
-                  </a>
+                  <span>Located in Nassau County, NY — serving all of NY</span>
                 </div>
                 <div className="flex items-start">
                   <svg className="w-6 h-6 text-[#6FA8DC] mr-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
-                  <a href="tel:5551234567" className="hover:text-[#6FA8DC] transition-colors">
-                    (555) 123-4567
+                  <a href="tel:+15167252774" className="hover:text-[#6FA8DC] transition-colors">
+                    516 725 2774
                   </a>
                 </div>
               </div>

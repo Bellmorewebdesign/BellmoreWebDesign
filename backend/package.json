@@ -1,7 +1,7 @@
 {
   "name": "bellmore-web-design-backend",
   "version": "1.0.0",
-  "description": "Backend API for Bellmore Web Design contact form",
+  "description": "Backend API for Bellmore Web Design contact form (Telegram notifications only, no email)",
   "main": "server.js",
   "scripts": {
     "dev": "node server.js",

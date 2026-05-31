@@ -1,11 +1,13 @@
 import Header from '@/components/Header';
+import ScrollProgress from '@/components/ScrollProgress';
 import Hero from '@/components/Hero';
 import ProblemSection from '@/components/ProblemSection';
 import SolutionSection from '@/components/SolutionSection';
 import ServicesSection from '@/components/ServicesSection';
 import WhoIHelpSection from '@/components/WhoIHelpSection';
-import WorkSection from '@/components/WorkSection';
+import InteractiveSamples from '@/components/InteractiveSamples';
 import SampleSitesSection from '@/components/SampleSitesSection';
+import WorkSection from '@/components/WorkSection';
 import ProcessSection from '@/components/ProcessSection';
 import PricingSection from '@/components/PricingSection';
 import FAQSection from '@/components/FAQSection';
@@ -15,6 +17,7 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <Header />
       <main>
         <Hero />
@@ -22,8 +25,9 @@ export default function Home() {
         <SolutionSection />
         <ServicesSection />
         <WhoIHelpSection />
-        <WorkSection />
+        <InteractiveSamples />
         <SampleSitesSection />
+        <WorkSection />
         <ProcessSection />
         <PricingSection />
         <FAQSection />

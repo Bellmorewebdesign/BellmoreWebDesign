@@ -4,12 +4,15 @@
   --warm-offwhite: #FAF7F0;
   --soft-cream: #FFFDF7;
   --deep-navy: #1E2A38;
+  --ink: #16212C;
   --muted-blue: #6FA8DC;
+  --accent-deep: #4E86BC;
   --soft-sage: #A8C3A0;
   --warm-tan: #D8BFA3;
+  --warm-gold: #C9A86A;
   --light-border: #E8DED0;
   --muted-gray: #5F6B73;
-  
+
   --background: var(--warm-offwhite);
   --foreground: var(--deep-navy);
 }
@@ -20,15 +23,100 @@
   --color-warm-offwhite: #FAF7F0;
   --color-soft-cream: #FFFDF7;
   --color-deep-navy: #1E2A38;
+  --color-ink: #16212C;
   --color-muted-blue: #6FA8DC;
+  --color-accent-deep: #4E86BC;
   --color-soft-sage: #A8C3A0;
   --color-warm-tan: #D8BFA3;
+  --color-warm-gold: #C9A86A;
   --color-light-border: #E8DED0;
   --color-muted-gray: #5F6B73;
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), system-ui, sans-serif;
+}
+
+html {
+  scroll-padding-top: 5.5rem;
 }
 
 body {
   background: var(--warm-offwhite);
   color: var(--deep-navy);
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), var(--font-inter), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* Premium component utilities */
+.glass-header {
+  background: rgba(255, 253, 247, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid rgba(232, 222, 208, 0.7);
+}
+
+.shadow-soft {
+  box-shadow: 0 1px 2px rgba(30, 42, 56, 0.04), 0 8px 24px -12px rgba(30, 42, 56, 0.18);
+}
+
+.shadow-premium {
+  box-shadow: 0 2px 4px rgba(30, 42, 56, 0.04), 0 24px 60px -24px rgba(30, 42, 56, 0.28);
+}
+
+.gradient-text {
+  background: linear-gradient(120deg, var(--accent-deep), var(--muted-blue) 55%, var(--soft-sage));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 2px 4px rgba(30, 42, 56, 0.05), 0 30px 60px -24px rgba(30, 42, 56, 0.3);
+}
+
+/* Subtle button interactions */
+.btn-press {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.btn-press:hover {
+  transform: translateY(-2px);
+}
+.btn-press:active {
+  transform: translateY(0);
+}
+
+/* Decorative dotted grid background */
+.bg-dotgrid {
+  background-image: radial-gradient(rgba(30, 42, 56, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .card-hover:hover,
+  .btn-press:hover {
+    transform: none;
+  }
 }

@@ -6,6 +6,7 @@ import SolutionSection from '@/components/SolutionSection';
 import ServicesSection from '@/components/ServicesSection';
 import WhoIHelpSection from '@/components/WhoIHelpSection';
 import InteractiveSamples from '@/components/InteractiveSamples';
+import FeaturedSample from '@/components/FeaturedSample';
 import SampleSitesSection from '@/components/SampleSitesSection';
 import WorkSection from '@/components/WorkSection';
 import ProcessSection from '@/components/ProcessSection';
@@ -21,12 +22,13 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
+        <InteractiveSamples />
+        <FeaturedSample />
+        <SampleSitesSection />
         <ProblemSection />
         <SolutionSection />
         <ServicesSection />
         <WhoIHelpSection />
-        <InteractiveSamples />
-        <SampleSitesSection />
         <WorkSection />
         <ProcessSection />
         <PricingSection />

@@ -24,13 +24,13 @@ export default function WorkSection() {
     <section id="work" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#FFFDF7] to-[#FAF7F0]">
       <div className="max-w-4xl mx-auto">
         <Reveal className="text-center mb-10 max-w-2xl mx-auto">
-          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#6FA8DC]">Real work</span>
+          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#6FA8DC]">Real projects</span>
           <h2 className="mt-3 text-2xl md:text-3xl font-bold text-[#1E2A38] leading-tight">
-            A few real projects
+            Real projects
           </h2>
           <p className="mt-3 text-base text-[#5F6B73] leading-relaxed">
-            Here are a couple of real sites connected to local projects. The sample concepts above
-            show the kind of sites we can create for different businesses.
+            A few real sites connected to local projects. The sample concepts above show the direction
+            we can take for different industries.
           </p>
         </Reveal>
 

@@ -103,9 +103,91 @@ h1, h2, h3, h4 {
   background-size: 22px 22px;
 }
 
+/* CTA shimmer sweep */
+.cta-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cta-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+.cta-shimmer:hover::after {
+  left: 150%;
+}
+
+/* Decorative animated grid (tech sample) */
+.bg-techgrid {
+  background-image: linear-gradient(rgba(120, 180, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 180, 255, 0.09) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 44px 44px; }
+}
+.animate-grid-pan {
+  animation: grid-pan 8s linear infinite;
+}
+
+/* Animated gradient border for premium buttons */
+.gradient-border-btn {
+  position: relative;
+  background: rgba(10, 14, 26, 0.6);
+  z-index: 0;
+}
+.gradient-border-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(120deg, #22d3ee, #3b82f6, #8b5cf6, #22d3ee);
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-pan 4s linear infinite;
+  z-index: -1;
+}
+@keyframes border-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
+  }
+  .cta-shimmer::after,
+  .animate-float-slow,
+  .animate-grid-pan,
+  .gradient-border-btn::before {
+    animation: none !important;
+    transition: none !important;
   }
   *,
   *::before,

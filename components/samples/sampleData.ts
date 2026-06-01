@@ -26,7 +26,7 @@ export const HOME_SAMPLES: HomeSample[] = [
     tagline: 'Make your home look fresh again',
     href: '/sample-sites/exterior-cleaning',
     cta: 'Get a Free Estimate',
-    hero: '/images/samples/pressure-washing/hero-driveway-wash.jpg',
+    hero: '/images/samples/pressure-washing/driveway.jpg',
     accent: '#0E8FB0',
     accentDark: '#0B5E78',
     features: ['House Washing', 'Driveways', 'Patios'],

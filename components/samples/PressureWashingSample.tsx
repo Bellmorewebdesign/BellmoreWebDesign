@@ -11,8 +11,8 @@ import {
   ProcessSteps,
   TrustCards,
   ChipRow,
-  BeforeAfterGrid,
 } from './SampleSections';
+import BeforeAfterCard from '../sample-sites/BeforeAfterCard';
 import { WaterDroplets } from './Decorations';
 import type { SampleTheme } from './types';
 
@@ -39,11 +39,35 @@ const services = [
   { title: 'Seasonal Maintenance', desc: 'Recurring cleaning plans to keep your property looking its best.', image: { src: `${IMG}/neighborhood-homes.jpg`, alt: 'Tidy neighborhood homes' } },
 ];
 
-const beforeAfter = [
-  { image: { src: `${IMG}/clean-home-exterior.jpg`, alt: 'Home exterior cleaning result' }, label: 'House Siding', location: 'Bellmore, NY', result: 'Like new' },
-  { image: { src: `${IMG}/patio-cleaning.jpg`, alt: 'Patio cleaning result' }, label: 'Patio & Pavers', location: 'Merrick, NY', result: 'Ready for summer' },
-  { image: { src: `${IMG}/surface-cleaning.jpg`, alt: 'Driveway cleaning result' }, label: 'Driveway', location: 'Wantagh, NY', result: 'Buildup gone' },
-  { image: { src: `${IMG}/neighborhood-homes.jpg`, alt: 'Storefront cleaning result' }, label: 'Storefront', location: 'Freeport, NY', result: 'Fresh curb appeal' },
+const realBeforeAfter = [
+  {
+    title: 'Storefront Cleaning',
+    tag: 'Commercial',
+    imageSrc: `${IMG}/storefront.jpg`,
+    alt: 'Storefront exterior cleaning before and after',
+    description: 'Clean glass, brighter entryways, and a better first impression for walk-in customers.',
+  },
+  {
+    title: 'Driveway Cleaning',
+    tag: 'Residential',
+    imageSrc: `${IMG}/driveway.jpg`,
+    alt: 'Driveway cleaning before and after',
+    description: 'Built-up dirt and stains removed to make the property look newer and better maintained.',
+  },
+  {
+    title: 'Patio and Paver Cleaning',
+    tag: 'Outdoor Spaces',
+    imageSrc: `${IMG}/patio.jpg`,
+    alt: 'Patio cleaning before and after',
+    description: 'Patios, pavers, and backyard areas cleaned up for a fresher outdoor space.',
+  },
+  {
+    title: 'House Siding Wash',
+    tag: 'House Washing',
+    imageSrc: `${IMG}/siding.jpg`,
+    alt: 'House siding wash before and after',
+    description: 'Siding cleaned carefully to remove grime and improve curb appeal.',
+  },
 ];
 
 const steps = [
@@ -73,7 +97,7 @@ export default function PressureWashingSample() {
         subtitle="Pressure washing, house washing, and exterior care for Long Island homes and businesses."
         primary={{ label: 'Get a Free Estimate', href: '#estimate' }}
         secondary={{ label: 'View Services', href: '#services' }}
-        image={{ src: `${IMG}/hero-driveway-wash.jpg`, alt: 'A worker pressure washing a residential driveway' }}
+        image={{ src: `${IMG}/siding.jpg`, alt: 'House siding before and after pressure washing' }}
         theme={theme}
         decoration={<WaterDroplets />}
         aside={
@@ -109,15 +133,30 @@ export default function PressureWashingSample() {
         </div>
       </SectionShell>
 
-      <SectionShell style={{ backgroundColor: theme.accentSoft }}>
+      <SectionShell
+        style={{
+          background: `linear-gradient(135deg, ${theme.accentSoft} 0%, #E8F7FA 100%)`,
+        }}
+      >
         <SectionHeading
           eyebrow="Before & after"
-          title="See the difference a cleaning makes"
-          subtitle="Sample visuals showing the kind of transformation exterior cleaning can deliver."
+          title="Realistic Before and After Results"
+          subtitle="These sample result photos show the kind of transformation an exterior cleaning website should highlight. Strong visuals help customers trust the work faster."
           theme={theme}
         />
-        <div className="mt-12">
-          <BeforeAfterGrid items={beforeAfter} theme={theme} />
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {realBeforeAfter.map((item, i) => (
+            <BeforeAfterCard
+              key={item.title}
+              title={item.title}
+              tag={item.tag}
+              imageSrc={item.imageSrc}
+              alt={item.alt}
+              description={item.description}
+              theme={theme}
+              index={i}
+            />
+          ))}
         </div>
       </SectionShell>
 

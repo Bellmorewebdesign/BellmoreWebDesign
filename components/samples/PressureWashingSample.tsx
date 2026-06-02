@@ -43,28 +43,28 @@ const realBeforeAfter = [
   {
     title: 'Storefront Cleaning',
     tag: 'Commercial',
-    imageSrc: `${IMG}/storefront.jpg`,
+    imageSrc: `${IMG}/storefront.png`,
     alt: 'Storefront exterior cleaning before and after',
     description: 'Clean glass, brighter entryways, and a better first impression for walk-in customers.',
   },
   {
     title: 'Driveway Cleaning',
     tag: 'Residential',
-    imageSrc: `${IMG}/driveway.jpg`,
+    imageSrc: `${IMG}/driveway.png`,
     alt: 'Driveway cleaning before and after',
     description: 'Built-up dirt and stains removed to make the property look newer and better maintained.',
   },
   {
     title: 'Patio and Paver Cleaning',
     tag: 'Outdoor Spaces',
-    imageSrc: `${IMG}/patio.jpg`,
+    imageSrc: `${IMG}/patio.png`,
     alt: 'Patio cleaning before and after',
     description: 'Patios, pavers, and backyard areas cleaned up for a fresher outdoor space.',
   },
   {
     title: 'House Siding Wash',
     tag: 'House Washing',
-    imageSrc: `${IMG}/siding.jpg`,
+    imageSrc: `${IMG}/siding.png`,
     alt: 'House siding wash before and after',
     description: 'Siding cleaned carefully to remove grime and improve curb appeal.',
   },
@@ -97,7 +97,7 @@ export default function PressureWashingSample() {
         subtitle="Pressure washing, house washing, and exterior care for Long Island homes and businesses."
         primary={{ label: 'Get a Free Estimate', href: '#estimate' }}
         secondary={{ label: 'View Services', href: '#services' }}
-        image={{ src: `${IMG}/siding.jpg`, alt: 'House siding before and after pressure washing' }}
+        image={{ src: `${IMG}/siding.png`, alt: 'House siding before and after pressure washing' }}
         theme={theme}
         decoration={<WaterDroplets />}
         aside={

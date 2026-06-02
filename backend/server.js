@@ -124,19 +124,29 @@ app.post('/api/contact', contactLimiter, async (req, res) => {
       return res.status(400).json({ ok: false, error: 'Message is required.' });
     }
 
-    const telegramMessage = `🚨 <b>New Bellmore Web Design Lead</b>
+    const lines = [
+      '🚨 <b>New Bellmore Web Design Lead</b>\n',
+      `<b>Name:</b> ${escapeHtml(name)}`,
+      `<b>Email:</b> ${escapeHtml(email)}`,
+    ];
 
-<b>Name:</b> ${escapeHtml(name)}
-<b>Email:</b> ${escapeHtml(email)}
-<b>Phone:</b> ${escapeHtml(phone) || 'Not provided'}
-<b>Business:</b> ${escapeHtml(business) || 'Not provided'}
-<b>Website:</b> ${escapeHtml(website) || 'Not provided'}
-<b>Service:</b> ${escapeHtml(service) || 'Not provided'}
-<b>Budget:</b> ${escapeHtml(budget) || 'Not provided'}
-<b>Timeline:</b> ${escapeHtml(timeline) || 'Not provided'}
+    if (phone && phone.trim()) {
+      lines.push(`<b>Phone:</b> ${escapeHtml(phone)}`);
+    }
 
-<b>Message:</b>
-${escapeHtml(message)}`;
+    if (business && business.trim()) {
+      lines.push(`<b>Business Name:</b> ${escapeHtml(business)}`);
+    }
+
+    if (website && website.trim()) {
+      lines.push(`<b>Current Link:</b> ${escapeHtml(website)}`);
+    }
+
+    lines.push('');
+    lines.push('<b>Message:</b>');
+    lines.push(escapeHtml(message));
+
+    const telegramMessage = lines.join('\n');
 
     await sendTelegramMessage(telegramMessage);
 

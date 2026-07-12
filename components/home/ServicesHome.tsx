@@ -10,11 +10,10 @@ export default function ServicesHome() {
         <Reveal className="text-center mb-14 max-w-2xl mx-auto">
           <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#6FA8DC]">What I do</span>
           <h2 className="mt-3 text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-[#1E2A38] leading-tight">
-            Three ways to grow your online presence
+            What I can help with
           </h2>
           <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed">
-            Websites, social media, and photography — offered together or on their own, whatever your
-            business actually needs.
+            Websites, social media, and photography. You can get one of them or all three.
           </p>
         </Reveal>
 
@@ -55,11 +54,17 @@ export default function ServicesHome() {
           })}
         </Stagger>
 
-        <Reveal className="mt-10 text-center">
+        <Reveal className="mt-8 mx-auto max-w-2xl rounded-2xl border border-[#E8DED0] bg-[#FAF7F0] px-6 py-4 text-center">
+          <p className="text-sm text-[#5F6B73]">
+            Social media and content (the photos and short videos) usually go together in one monthly plan.
+          </p>
+        </Reveal>
+
+        <Reveal className="mt-6 text-center">
           <p className="text-[#5F6B73]">
-            Not sure which you need?{' '}
+            Not sure what you need?{' '}
             <Link href="/contact" className="font-semibold text-[#4E86BC] hover:text-[#1E2A38]">
-              Get a free homepage mockup or content plan →
+              Get a free homepage mockup or content plan
             </Link>
           </p>
         </Reveal>

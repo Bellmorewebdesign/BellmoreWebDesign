@@ -1,5 +1,5 @@
 // Single source of truth for site-wide content.
-// Front-end only — none of this affects the contact-form backend contract.
+// Front-end only. None of this affects the contact-form backend contract.
 
 export const SITE_URL = 'https://bellmorewebdesign.com';
 export const BUSINESS_NAME = 'Bellmore Web Design';
@@ -100,18 +100,18 @@ export interface Testimonial {
   initials: string;
 }
 
-// Real testimonials. Lightly cleaned for punctuation only — meaning unchanged.
+// Real testimonials, kept in the owners' own words.
 export const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      'This site boosted my dog walking sales a ton! I don’t have any complaints — Lucas was very helpful during the whole process. Even someone who doesn’t know anything about technology could get their own website with no fuss through Lucas!',
+      "This site boosted my dog walking sales a ton! I don't have any complaints, Lucas was very helpful during the whole process! Even someone who doesn't know anything about technology could get their own website with no fuss through Lucas!",
     name: 'Katie',
     business: "Katie's Canines",
     initials: 'K',
   },
   {
     quote:
-      'Lucas, I love the site a lot! I know how hard and how much work you put into this!',
+      'Lucas! I love the site a lot! I know how hard and how much work you put into this!',
     name: 'Donna',
     business: "Grandma's Garden",
     initials: 'D',
@@ -140,7 +140,7 @@ export const SERVICE_AREA: ServiceArea = {
   ],
 };
 
-// Broad set of local businesses we help — kept as a light, scannable list.
+// Broad set of local businesses we help.
 export const INDUSTRIES: string[] = [
   'Auto body shops',
   'Barbers',

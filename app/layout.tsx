@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     "business photography Bellmore",
     "local web designer New York",
   ],
-  authors: [{ name: "Lucas — Bellmore Web Design" }],
+  authors: [{ name: "Lucas, Bellmore Web Design" }],
   alternates: { canonical: "/" },
   openGraph: {
     title: "Bellmore Web Design | Websites, Social Media & Photography",

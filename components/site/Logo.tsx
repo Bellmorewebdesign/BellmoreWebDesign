@@ -18,7 +18,7 @@ export default function Logo({ tone = 'ink', className = '' }: LogoProps) {
   return (
     <Link
       href="/"
-      aria-label="Bellmore Web Design — home"
+      aria-label="Bellmore Web Design home"
       className={`group inline-flex items-center gap-2.5 ${className}`}
     >
       <span className="block h-[32px] w-[110px] overflow-hidden shrink-0" aria-hidden="true">

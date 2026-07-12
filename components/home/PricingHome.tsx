@@ -1,6 +1,6 @@
 import PricingCard from '../PricingCard';
 import { Reveal, Stagger, StaggerItem } from '../motion-primitives';
-import { WEBSITE_PLANS, MONTHLY_PLANS, PRICING_NOTE } from '../site/offerings';
+import { WEBSITE_PLANS, MONTHLY_PLANS, PRICING_NOTE, WEBSITE_PRICING_NOTE } from '../site/offerings';
 
 export default function PricingHome() {
   return (
@@ -12,7 +12,8 @@ export default function PricingHome() {
             Clear starting prices
           </h2>
           <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed">
-            One-time website work and ongoing monthly services, kept separate so it&apos;s easy to compare.
+            A website is a one-time cost. Monthly plans are for social media and content. Here is roughly
+            where things start.
           </p>
         </Reveal>
 
@@ -22,13 +23,16 @@ export default function PricingHome() {
           <span className="text-xs text-[#8A939B]">one-time</span>
           <span className="h-px flex-1 bg-[#E8DED0]" />
         </Reveal>
-        <Stagger className="grid sm:grid-cols-2 gap-6 mb-14 max-w-3xl" stagger={0.12}>
+        <Stagger className="grid sm:grid-cols-2 gap-6 mb-6 max-w-3xl" stagger={0.12}>
           {WEBSITE_PLANS.map((plan) => (
             <StaggerItem key={plan.title} className="h-full">
               <PricingCard {...plan} />
             </StaggerItem>
           ))}
         </Stagger>
+        <Reveal className="mb-14 max-w-3xl rounded-2xl border border-[#E8DED0] bg-white px-6 py-5 shadow-soft">
+          <p className="text-sm text-[#5F6B73] leading-relaxed">{WEBSITE_PRICING_NOTE}</p>
+        </Reveal>
 
         {/* Monthly services */}
         <Reveal className="mb-5 flex items-center gap-3">

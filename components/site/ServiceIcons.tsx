@@ -1,4 +1,4 @@
-// Shared line icons for the three core services. Decorative — callers label them.
+// Shared line icons for the three core services. Decorative; callers label them.
 
 export function WebsiteIcon({ className = 'h-6 w-6' }: { className?: string }) {
   return (

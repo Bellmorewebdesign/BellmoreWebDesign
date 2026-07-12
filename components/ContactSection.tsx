@@ -29,6 +29,7 @@ export default function ContactSection() {
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const GENERIC_ERROR = 'Something went wrong. Please try again or contact me directly.';
@@ -52,10 +53,12 @@ export default function ContactSection() {
     if (!formData.name.trim()) {
       nextErrors.name = 'Please add your name.';
     }
-    if (!formData.email.trim()) {
-      nextErrors.email = 'Please add your email so I can reply.';
-    } else if (!isValidEmail(formData.email)) {
-      nextErrors.email = 'Please enter a valid email address.';
+    // Email is optional. Only check the format if they typed something.
+    if (formData.email.trim() && !isValidEmail(formData.email)) {
+      nextErrors.email = 'That email does not look right. Fix it or leave it blank.';
+    }
+    if (!formData.phone.trim()) {
+      nextErrors.phone = 'Please add a phone number so I can reach you.';
     }
     if (!formData.message.trim()) {
       nextErrors.message = 'Please add a short message.';
@@ -74,6 +77,7 @@ export default function ContactSection() {
       const focusOrder: Array<[FieldName, React.RefObject<HTMLInputElement | HTMLTextAreaElement | null>]> = [
         ['name', nameRef],
         ['email', emailRef],
+        ['phone', phoneRef],
         ['message', messageRef],
       ];
       const firstInvalid = focusOrder.find(([field]) => nextErrors[field]);
@@ -85,10 +89,19 @@ export default function ContactSection() {
     setStatusMessage(null);
 
     try {
+      // The backend requires a valid email, but the form treats email as optional.
+      // When it's left blank, substitute a placeholder so the submission still goes
+      // through and the alert still fires (I reply using the required phone number).
+      // Only the email VALUE is substituted here; the payload keys are unchanged.
+      const submission = {
+        ...formData,
+        email: formData.email.trim() ? formData.email : 'noemail@bellmorewebdesign.com',
+      };
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submission),
       });
 
       let data: { ok?: boolean; message?: string; error?: string } | null = null;
@@ -131,8 +144,8 @@ export default function ContactSection() {
     <div id="mockup-form" className="scroll-mt-24 rounded-2xl bg-white border border-[#E8DED0] shadow-soft p-7 sm:p-9">
       <h2 className="text-2xl font-bold text-[#1E2A38]">Request your free mockup</h2>
       <p className="mt-1.5 text-sm text-[#5F6B73]">
-        Tell me about your business — mention if you&apos;re interested in a website, social media,
-        photography, or a combination.
+        Tell me a bit about your business. Let me know if you want a website, social media,
+        photography, or some mix of them.
       </p>
 
       <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-5">
@@ -168,22 +181,20 @@ export default function ContactSection() {
           </div>
           <div>
             <label htmlFor="email" className={LABEL_CLASS}>
-              Email <span className="text-[#B91C1C]" aria-hidden="true">*</span>
+              Email <span className="font-normal text-[#8A939B]">(optional)</span>
             </label>
             <input
               ref={emailRef}
               type="email"
               id="email"
               name="email"
-              required
-              aria-required="true"
               autoComplete="email"
               inputMode="email"
               placeholder="you@example.com"
               value={formData.email}
               onChange={(e) => updateField('email', e.target.value)}
               aria-invalid={errors.email ? true : undefined}
-              aria-describedby={describedBy('email')}
+              aria-describedby={describedBy('email', 'email-hint')}
               className={inputClass('email')}
             />
             {errors.email && (
@@ -191,28 +202,40 @@ export default function ContactSection() {
                 {errors.email}
               </p>
             )}
+            <p id="email-hint" className={HINT_CLASS}>
+              Optional. Add it if you would rather I email you back.
+            </p>
           </div>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-5">
           <div>
             <label htmlFor="phone" className={LABEL_CLASS}>
-              Phone <span className="font-normal text-[#8A939B]">(optional)</span>
+              Phone <span className="text-[#B91C1C]" aria-hidden="true">*</span>
             </label>
             <input
+              ref={phoneRef}
               type="tel"
               id="phone"
               name="phone"
+              required
+              aria-required="true"
               autoComplete="tel"
               inputMode="tel"
               placeholder="(516) 555-0123"
               value={formData.phone}
               onChange={(e) => updateField('phone', e.target.value)}
+              aria-invalid={errors.phone ? true : undefined}
               aria-describedby={describedBy('phone', 'phone-hint')}
               className={inputClass('phone')}
             />
+            {errors.phone && (
+              <p id="phone-error" className="mt-1.5 text-xs font-medium text-[#B91C1C]">
+                {errors.phone}
+              </p>
+            )}
             <p id="phone-hint" className={HINT_CLASS}>
-              Prefer a call or text back? Add your number.
+              Best way to reach you. I can call or text.
             </p>
           </div>
           <div>

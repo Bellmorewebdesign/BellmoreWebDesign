@@ -1,19 +1,32 @@
+import type { Metadata } from 'next';
 import Header from '@/components/Header';
 import ScrollProgress from '@/components/ScrollProgress';
-import Hero from '@/components/Hero';
-import ProblemSection from '@/components/ProblemSection';
-import SolutionSection from '@/components/SolutionSection';
-import ServicesSection from '@/components/ServicesSection';
-import WhoIHelpSection from '@/components/WhoIHelpSection';
-import InteractiveSamples from '@/components/InteractiveSamples';
-import FeaturedSample from '@/components/FeaturedSample';
-import SampleSitesSection from '@/components/SampleSitesSection';
-import WorkSection from '@/components/WorkSection';
-import ProcessSection from '@/components/ProcessSection';
-import PricingSection from '@/components/PricingSection';
-import FAQSection from '@/components/FAQSection';
-import ContactSection from '@/components/ContactSection';
+import MobileActionBar from '@/components/MobileActionBar';
 import Footer from '@/components/Footer';
+import HomeHero from '@/components/home/HomeHero';
+import TrustBar from '@/components/home/TrustBar';
+import ServicesHome from '@/components/home/ServicesHome';
+import WhoWeHelp from '@/components/home/WhoWeHelp';
+import RealWorkPreview from '@/components/home/RealWorkPreview';
+import Testimonials from '@/components/home/Testimonials';
+import PricingHome from '@/components/home/PricingHome';
+import ProcessHome from '@/components/home/ProcessHome';
+import ServiceAreaSection from '@/components/site/ServiceAreaSection';
+import FinalCTA from '@/components/home/FinalCTA';
+
+export const metadata: Metadata = {
+  title: 'Bellmore Web Design | Websites, Social Media & Photography',
+  description:
+    'Bellmore Web Design builds custom websites and manages social media and on-site photography for local small businesses. Free homepage mockup, no commitment.',
+  alternates: { canonical: 'https://bellmorewebdesign.com' },
+  openGraph: {
+    title: 'Bellmore Web Design | Websites, Social Media & Photography',
+    description:
+      'Custom websites, social media management, and on-site photography for local small businesses. Free homepage mockup, no commitment.',
+    url: 'https://bellmorewebdesign.com',
+    type: 'website',
+  },
+};
 
 export default function Home() {
   return (
@@ -21,21 +34,19 @@ export default function Home() {
       <ScrollProgress />
       <Header />
       <main>
-        <Hero />
-        <InteractiveSamples />
-        <FeaturedSample />
-        <SampleSitesSection />
-        <ProblemSection />
-        <SolutionSection />
-        <ServicesSection />
-        <WhoIHelpSection />
-        <WorkSection />
-        <ProcessSection />
-        <PricingSection />
-        <FAQSection />
-        <ContactSection />
+        <HomeHero />
+        <TrustBar />
+        <ServicesHome />
+        <WhoWeHelp />
+        <RealWorkPreview />
+        <Testimonials />
+        <PricingHome />
+        <ProcessHome />
+        <ServiceAreaSection />
+        <FinalCTA />
       </main>
       <Footer />
+      <MobileActionBar />
     </>
   );
 }

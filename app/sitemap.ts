@@ -4,31 +4,34 @@ export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://bellmorewebdesign.com';
-  
+  const now = new Date();
+
+  const mainPages = [
+    { path: '', priority: 1 },
+    { path: '/work', priority: 0.9 },
+    { path: '/contact', priority: 0.9 },
+  ];
+
+  const samplePages = [
+    '/sample-sites/exterior-cleaning',
+    '/sample-sites/restaurant',
+    '/sample-sites/pet-care',
+    '/sample-sites/events',
+    '/sample-sites/high-end-tech',
+  ];
+
   return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/sample-sites/exterior-cleaning`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sample-sites/restaurant`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sample-sites/pet-care`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
+    ...mainPages.map((p) => ({
+      url: `${baseUrl}${p.path}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: p.priority,
+    })),
+    ...samplePages.map((path) => ({
+      url: `${baseUrl}${path}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
   ];
 }

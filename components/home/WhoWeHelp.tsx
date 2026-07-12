@@ -11,8 +11,8 @@ export default function WhoWeHelp() {
             Built for local service businesses
           </h2>
           <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed">
-            If your customers find you through word of mouth, Instagram, or a Facebook page, a cleaner
-            online presence helps them choose you. A few examples:
+            Most of my clients get found by word of mouth or social media. A website makes it easier for
+            those customers to pick you. A few examples:
           </p>
         </Reveal>
 
@@ -27,7 +27,7 @@ export default function WhoWeHelp() {
         </Stagger>
 
         <Reveal className="mt-6">
-          <p className="text-sm text-[#8A939B]">…and other local service businesses. Not on the list? It probably still fits.</p>
+          <p className="text-sm text-[#8A939B]">Plus plenty of other local businesses. Not on the list? It probably still works.</p>
         </Reveal>
       </div>
     </section>

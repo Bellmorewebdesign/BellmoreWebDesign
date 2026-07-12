@@ -12,7 +12,7 @@ export default function RealProjectsSection() {
             Live websites built for local businesses
           </h2>
           <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed">
-            Every project below is a real local business — visit any one to see the finished site.
+            Every project below is a real local business. Visit any one to see the finished site.
           </p>
         </Reveal>
 

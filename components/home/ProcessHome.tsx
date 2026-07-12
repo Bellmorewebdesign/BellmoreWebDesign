@@ -8,7 +8,7 @@ export default function ProcessHome() {
         <Reveal className="text-center mb-12 max-w-2xl mx-auto">
           <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#6FA8DC]">How it works</span>
           <h2 className="mt-3 text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-[#1E2A38] leading-tight">
-            A simple, no-pressure process
+            How it usually goes
           </h2>
         </Reveal>
 

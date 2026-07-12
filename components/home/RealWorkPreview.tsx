@@ -13,7 +13,7 @@ export default function RealWorkPreview() {
             Real projects for real local clients
           </h2>
           <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed">
-            These are live websites built for local businesses — not sample concepts.
+            These are live websites I built for local businesses, not sample concepts.
           </p>
         </Reveal>
 

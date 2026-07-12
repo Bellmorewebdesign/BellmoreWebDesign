@@ -1,4 +1,4 @@
-// Reusable case-study structure. Add real photos to `images` later — the
+// Reusable case-study structure. Add real photos to `images` later. The
 // gallery renders a "coming soon" state while a study has no images, so no
 // stock or invented photos are ever presented as completed client work.
 

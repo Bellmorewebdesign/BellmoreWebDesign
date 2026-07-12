@@ -44,7 +44,7 @@ export default function TrustBar() {
               </div>
               <blockquote className="text-[#1E2A38] leading-relaxed">“{featured.quote}”</blockquote>
               <figcaption className="mt-3 text-sm font-semibold text-[#5F6B73]">
-                {featured.name} — {featured.business}
+                {featured.name}, {featured.business}
               </figcaption>
               <Link
                 href="/work"

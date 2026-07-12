@@ -12,7 +12,7 @@ import FinalCTA from '@/components/home/FinalCTA';
 export const metadata: Metadata = {
   title: 'Web Design & Content Portfolio | Bellmore Web Design',
   description:
-    'Real local client websites, featured case studies, and sample website concepts by Bellmore Web Design — web design, social media, and photography for small businesses.',
+    'Real local client websites, featured case studies, and sample website concepts by Bellmore Web Design. Web design, social media, and photography for small businesses.',
   alternates: { canonical: 'https://bellmorewebdesign.com/work' },
   openGraph: {
     title: 'Web Design & Content Portfolio | Bellmore Web Design',
@@ -38,8 +38,8 @@ export default function WorkPage() {
               Real client websites &amp; design work
             </h1>
             <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed max-w-2xl mx-auto">
-              Live local projects come first, followed by featured case studies and sample concepts that
-              show the design directions we can take.
+              My real client projects come first, then a featured case study, then sample concepts that
+              show different design directions.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
               <Link

@@ -12,7 +12,7 @@ import { Reveal } from '@/components/motion-primitives';
 export const metadata: Metadata = {
   title: 'Contact Bellmore Web Design | Free Homepage Mockup',
   description:
-    'Request a free homepage mockup from Bellmore Web Design. Website, social media, and photography plans for local businesses — call, text, email, or send a message.',
+    'Request a free homepage mockup from Bellmore Web Design. Website, social media, and photography plans for local businesses. Call, text, email, or send a message.',
   alternates: { canonical: 'https://bellmorewebdesign.com/contact' },
   openGraph: {
     title: 'Contact Bellmore Web Design | Free Homepage Mockup',
@@ -48,7 +48,7 @@ export default function ContactPage() {
             </h1>
             <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed max-w-2xl mx-auto">
               Tell me a little about your business and I&apos;ll send back a free idea for what your
-              site could look like — no pressure, no obligation.
+              site could look like. No pressure, and no commitment.
             </p>
             <ul className="mt-7 flex flex-wrap justify-center gap-2">
               {OFFER_POINTS.map((point) => (

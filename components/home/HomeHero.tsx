@@ -12,8 +12,8 @@ const CLARIFIERS = [
   'The completed website is a paid project',
   'Websites available throughout New York',
   'On-site content near Bellmore',
-  'Mobile-friendly by default',
-  'Personal support from Lucas',
+  'Built to work on phones',
+  'You work directly with me',
 ];
 
 const TILES = [
@@ -63,9 +63,8 @@ export default function HomeHero() {
             </motion.h1>
 
             <motion.p variants={item} className="text-lg text-[#5F6B73] mb-8 leading-relaxed max-w-xl">
-              Bellmore Web Design helps small businesses build a professional online presence through
-              custom websites, on-site photography, short-form content, and consistent social media
-              updates.
+              I build websites for local businesses and keep their social media active with real photos
+              and short videos of the work they do.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-col sm:flex-row flex-wrap gap-3 mb-8">
@@ -116,7 +115,7 @@ export default function HomeHero() {
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-[#6FA8DC]/15 via-transparent to-[#A8C3A0]/15 blur-2xl" />
             <div className="relative rounded-3xl border border-[#E8DED0] bg-white/80 backdrop-blur-sm p-5 sm:p-6 shadow-premium">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6FA8DC] mb-4">
-                Your complete online presence
+                What I set up for you
               </p>
               <div className="space-y-3">
                 {TILES.map(({ Icon, label, sub, accent }) => (
@@ -138,7 +137,7 @@ export default function HomeHero() {
                 ))}
               </div>
               <div className="mt-5 flex items-center justify-between rounded-2xl bg-[#1E2A38] px-5 py-4 text-white">
-                <span className="text-sm font-medium text-white/85">One team for all three</span>
+                <span className="text-sm font-medium text-white/85">It&apos;s just me, doing all three</span>
                 <Link href="/#services" className="text-sm font-semibold text-[#9CC3E6] hover:text-white transition-colors">
                   See services →
                 </Link>

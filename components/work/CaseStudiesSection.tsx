@@ -31,8 +31,8 @@ export default function CaseStudiesSection() {
             A closer look at the work
           </h2>
           <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed">
-            Featured projects with the website, the services performed, and — as shoots happen — real
-            photos of the finished work.
+            Featured projects with the website, the work I did, and real photos of the finished job
+            once I have shot them.
           </p>
         </Reveal>
 
@@ -84,7 +84,7 @@ export default function CaseStudiesSection() {
                   </div>
                 </div>
 
-                {/* Gallery — real images only. Empty studies show a coming-soon state. */}
+                {/* Gallery: real images only. Empty studies show a coming-soon state. */}
                 {study.images.length > 0 ? (
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-1 border-t border-[#EFE7DA] p-1">
                     {study.images.map((img) => (

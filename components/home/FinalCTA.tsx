@@ -12,7 +12,8 @@ export default function FinalCTA() {
             Ready to improve how your business looks online?
           </h2>
           <p className="mt-4 text-lg text-white/70 max-w-xl mx-auto">
-            Start with a free homepage mockup — no cost, no commitment. See the idea first, then decide.
+            Start with a free homepage mockup. It costs nothing and you are not signing up for anything.
+            You see the idea first, then decide.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

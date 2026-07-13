@@ -6,6 +6,7 @@ import MobileActionBar from '@/components/MobileActionBar';
 import Footer from '@/components/Footer';
 import RealProjectsSection from '@/components/work/RealProjectsSection';
 import CaseStudiesSection from '@/components/work/CaseStudiesSection';
+import GallerySection from '@/components/work/GallerySection';
 import SampleConceptsSection from '@/components/work/SampleConceptsSection';
 import FinalCTA from '@/components/home/FinalCTA';
 
@@ -57,6 +58,7 @@ export default function WorkPage() {
 
         <RealProjectsSection />
         <CaseStudiesSection />
+        <GallerySection />
         <SampleConceptsSection />
         <FinalCTA />
       </main>

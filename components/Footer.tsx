@@ -13,6 +13,7 @@ const EXPLORE = [
 const WORK_LINKS = [
   { label: 'Client Projects', href: '/work#client-projects' },
   { label: 'Case Studies', href: '/work#case-studies' },
+  { label: 'Content Gallery', href: '/work#gallery' },
   { label: 'Sample Concepts', href: '/work#sample-concepts' },
 ];
 

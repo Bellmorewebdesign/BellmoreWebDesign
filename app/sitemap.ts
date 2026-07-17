@@ -7,17 +7,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   const mainPages = [
-    { path: '', priority: 1 },
-    { path: '/work', priority: 0.9 },
-    { path: '/contact', priority: 0.9 },
+    { path: '/', priority: 1 },
+    { path: '/work/', priority: 0.9 },
+    { path: '/contact/', priority: 0.9 },
   ];
 
   const samplePages = [
-    '/sample-sites/exterior-cleaning',
-    '/sample-sites/restaurant',
-    '/sample-sites/pet-care',
-    '/sample-sites/events',
-    '/sample-sites/high-end-tech',
+    '/sample-sites/exterior-cleaning/',
+    '/sample-sites/restaurant/',
+    '/sample-sites/pet-care/',
+    '/sample-sites/events/',
+    '/sample-sites/high-end-tech/',
   ];
 
   return [

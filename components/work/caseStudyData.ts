@@ -27,12 +27,14 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: '2488 Merrick Road, Bellmore, NY 11710',
     href: 'https://bellmorewebdesign.github.io/PeakAutoCollision/',
     summary:
-      'A professional auto collision website designed to showcase services, repair work, reviews, and estimate contact options.',
+      "I built Peak Auto Collision a website that shows their services, repair work, reviews, and how to get an estimate. I also run their Instagram and Facebook, which is the reason I'm on-site shooting photos and short videos of the work. That content goes straight onto their social pages and into the website gallery.",
     services: [
       'Custom mobile-friendly website',
       'Services & repair overview',
       'Reviews section',
       'Estimate contact options',
+      'Instagram & Facebook management',
+      'On-site photos & short videos',
     ],
     // Real on-site photos, before/after shots, and social posts will be added here.
     images: [],

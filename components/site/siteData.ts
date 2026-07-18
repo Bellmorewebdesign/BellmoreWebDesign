@@ -91,6 +91,39 @@ export const REAL_PROJECTS: RealProject[] = [
     from: '#6b7683',
     to: '#1E2A38',
   },
+  {
+    name: "Jacob's Barbershop",
+    industry: 'Barbershop',
+    description:
+      'A polished barbershop website that presents services, shop information, and clear ways for customers to get in touch.',
+    href: 'https://bellmorewebdesign.github.io/JacobsBarbershop/',
+    label: 'Website Project',
+    initials: 'JB',
+    from: '#B7925A',
+    to: '#6F4E2E',
+  },
+  {
+    name: 'Barber Crew',
+    industry: 'Barbershop',
+    description:
+      'A modern barbershop website designed to showcase the brand, services, and customer contact options on any device.',
+    href: 'https://bellmorewebdesign.github.io/BarberCrew/',
+    label: 'Website Project',
+    initials: 'BC',
+    from: '#718096',
+    to: '#263442',
+  },
+  {
+    name: "Michael's Barber Studio",
+    industry: 'Barber Studio',
+    description:
+      'A mobile-friendly barber studio website with a strong visual identity and an easy path to learn about the business.',
+    href: 'https://bellmorewebdesign.github.io/michaelsbarberstudio/',
+    label: 'Website Project',
+    initials: 'MB',
+    from: '#8E6B48',
+    to: '#2E241C',
+  },
 ];
 
 export interface Testimonial {

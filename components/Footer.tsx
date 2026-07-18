@@ -57,7 +57,7 @@ export default function Footer() {
             <div>
               <Logo tone="light" />
               <p className="mt-4 text-sm text-white/60 leading-relaxed">
-                Websites, social media, and on-site photography for local small businesses.
+                Nassau County web design, website development, social media, and on-site photography for local small businesses.
               </p>
               <ul className="mt-4 space-y-1.5 text-sm">
                 <li>
@@ -140,8 +140,8 @@ export default function Footer() {
               </ul>
               <div className="mt-6 rounded-xl bg-white/5 p-4">
                 <p className="text-xs text-white/60 leading-relaxed">
-                  Websites throughout New York. On-site photography &amp; social content near Bellmore,
-                  generally within about a 30-minute drive.
+                  Based in Bellmore and serving web design clients throughout Nassau County, Long Island,
+                  and New York. On-site photography and social content are available near Bellmore.
                 </p>
               </div>
             </div>

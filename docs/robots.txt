@@ -1,4 +1,5 @@
 User-Agent: *
 Allow: /
 
+Host: https://bellmorewebdesign.com
 Sitemap: https://bellmorewebdesign.com/sitemap.xml

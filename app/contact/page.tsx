@@ -8,19 +8,30 @@ import ContactCards from '@/components/contact/ContactCards';
 import ContactFAQ from '@/components/contact/ContactFAQ';
 import ServiceAreaSection from '@/components/site/ServiceAreaSection';
 import { Reveal } from '@/components/motion-primitives';
+import { CONTACT_FAQS } from '@/components/site/offerings';
 
 export const metadata: Metadata = {
-  title: 'Contact Bellmore Web Design | Free Homepage Mockup',
+  title: 'Contact a Nassau County Web Designer',
   description:
-    'Request a free homepage mockup from Bellmore Web Design. Website, social media, and photography plans for local businesses. Call, text, email, or send a message.',
+    'Contact a Nassau County web designer for a free homepage mockup. Custom websites, redesigns, social media, and photography for local businesses.',
   alternates: { canonical: 'https://bellmorewebdesign.com/contact' },
   openGraph: {
-    title: 'Contact Bellmore Web Design | Free Homepage Mockup',
+    title: 'Contact a Nassau County Web Designer | Bellmore Web Design',
     description:
       'Request a free homepage mockup. Website, social media, and photography plans for local businesses.',
     url: 'https://bellmorewebdesign.com/contact',
     type: 'website',
   },
+};
+
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: CONTACT_FAQS.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
 };
 
 const OFFER_POINTS = [
@@ -105,6 +116,12 @@ export default function ContactPage() {
       </main>
       <Footer />
       <MobileActionBar />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData).replace(/</g, '\\u003c'),
+        }}
+      />
     </>
   );
 }

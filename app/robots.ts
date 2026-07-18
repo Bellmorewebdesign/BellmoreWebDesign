@@ -9,5 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
     },
     sitemap: 'https://bellmorewebdesign.com/sitemap.xml',
+    host: 'https://bellmorewebdesign.com',
   };
 }

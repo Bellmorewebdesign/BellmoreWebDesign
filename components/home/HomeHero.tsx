@@ -58,13 +58,12 @@ export default function HomeHero() {
               variants={item}
               className="text-4xl md:text-5xl lg:text-[3.4rem] font-extrabold text-[#1E2A38] mb-6 leading-[1.08]"
             >
-              Websites, Content, and{' '}
-              <span className="gradient-text">Social Media</span> for Local Businesses
+              Nassau County <span className="gradient-text">Web Design</span> for Local Businesses
             </motion.h1>
 
             <motion.p variants={item} className="text-lg text-[#5F6B73] mb-8 leading-relaxed max-w-xl">
-              I build websites for local businesses and keep their social media active with real photos
-              and short videos of the work they do.
+              I design and develop custom, mobile-friendly websites for businesses across Nassau County
+              and Long Island, with social media, photography, and content available too.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-col sm:flex-row flex-wrap gap-3 mb-8">

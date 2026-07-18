@@ -15,14 +15,14 @@ import ServiceAreaSection from '@/components/site/ServiceAreaSection';
 import FinalCTA from '@/components/home/FinalCTA';
 
 export const metadata: Metadata = {
-  title: 'Bellmore Web Design | Websites, Social Media & Photography',
+  title: 'Nassau County Web Design & Website Developer',
   description:
-    'Bellmore Web Design builds custom websites and manages social media and on-site photography for local small businesses. Free homepage mockup, no commitment.',
+    'Nassau County web designer and website developer creating custom, mobile-friendly websites for local businesses. Based in Bellmore, NY. Free homepage mockup.',
   alternates: { canonical: 'https://bellmorewebdesign.com' },
   openGraph: {
-    title: 'Bellmore Web Design | Websites, Social Media & Photography',
+    title: 'Nassau County Web Design & Website Developer',
     description:
-      'Custom websites, social media management, and on-site photography for local small businesses. Free homepage mockup, no commitment.',
+      'Custom, mobile-friendly websites for Nassau County and Long Island small businesses. Based in Bellmore, NY.',
     url: 'https://bellmorewebdesign.com',
     type: 'website',
   },

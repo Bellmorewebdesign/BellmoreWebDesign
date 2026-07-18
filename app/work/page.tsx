@@ -11,14 +11,14 @@ import SampleConceptsSection from '@/components/work/SampleConceptsSection';
 import FinalCTA from '@/components/home/FinalCTA';
 
 export const metadata: Metadata = {
-  title: 'Web Design & Content Portfolio | Bellmore Web Design',
+  title: 'Nassau County Web Design Portfolio',
   description:
-    'Real local client websites, featured case studies, and sample website concepts by Bellmore Web Design. Web design, social media, and photography for small businesses.',
+    'See websites built for Nassau County and Long Island businesses by Bellmore Web Design, including local client projects, case studies, and design concepts.',
   alternates: { canonical: 'https://bellmorewebdesign.com/work' },
   openGraph: {
-    title: 'Web Design & Content Portfolio | Bellmore Web Design',
+    title: 'Nassau County Web Design Portfolio | Bellmore Web Design',
     description:
-      'Real local client websites, featured case studies, and sample website concepts by Bellmore Web Design.',
+      'Local business websites, case studies, and design concepts from a Bellmore-based web designer.',
     url: 'https://bellmorewebdesign.com/work',
     type: 'website',
   },
@@ -36,11 +36,11 @@ export default function WorkPage() {
           <div className="relative max-w-4xl mx-auto text-center">
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#6FA8DC]">Our work</span>
             <h1 className="mt-3 text-4xl md:text-5xl font-extrabold text-[#1E2A38] leading-[1.1]">
-              Real client websites &amp; design work
+              Nassau County websites &amp; design work
             </h1>
             <p className="mt-4 text-lg text-[#5F6B73] leading-relaxed max-w-2xl mx-auto">
-              My real client projects come first, then a featured case study, then sample concepts that
-              show different design directions.
+              Explore websites I have designed for local businesses in Bellmore and across Long Island,
+              plus a featured case study and sample concepts showing different design directions.
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
               <Link

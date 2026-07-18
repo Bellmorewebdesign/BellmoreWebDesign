@@ -2,7 +2,13 @@ import type { RealProject } from './siteData';
 
 export default function ProjectCard({ project }: { project: RealProject }) {
   return (
-    <div className="card-hover flex h-full flex-col rounded-2xl border border-[#E8DED0] bg-white p-6 shadow-soft">
+    <a
+      href={project.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="card-hover flex h-full flex-col rounded-2xl border border-[#E8DED0] bg-white p-6 shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4E86BC]"
+      aria-label={`Visit ${project.name} website`}
+    >
       <div className="flex items-start gap-4">
         <span
           className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl text-white font-bold shadow-soft"
@@ -31,17 +37,14 @@ export default function ProjectCard({ project }: { project: RealProject }) {
 
       <p className="mt-3 text-sm text-[#5F6B73] leading-relaxed flex-1">{project.description}</p>
 
-      <a
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
+      <span
         className="btn-press mt-5 inline-flex items-center justify-center gap-1.5 self-start rounded-full bg-[#1E2A38] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#16212C]"
       >
         View Project
         <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
         </svg>
-      </a>
-    </div>
+      </span>
+    </a>
   );
 }

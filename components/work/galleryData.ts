@@ -11,4 +11,11 @@ export interface GalleryImage {
   business?: string;
 }
 
-export const GALLERY_IMAGES: GalleryImage[] = [];
+export const GALLERY_IMAGES: GalleryImage[] = [
+  {
+    src: '/images/projects/peak-auto-collision/truck-before-after.png',
+    alt: 'Before and after comparison of a pickup truck body repair and refinishing project',
+    caption: 'Pickup truck bodywork — before and after',
+    business: 'Peak Auto Collision',
+  },
+];

@@ -18,18 +18,23 @@ export default function TrustBar() {
           <Reveal>
             <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {REAL_PROJECTS.map((p) => (
-                <li
-                  key={p.name}
-                  className="flex flex-col items-center gap-2 rounded-2xl border border-[#E8DED0] bg-white p-4 text-center shadow-soft"
-                >
-                  <span
-                    className="flex h-11 w-11 items-center justify-center rounded-xl text-white font-bold shadow-soft"
-                    style={{ background: `linear-gradient(135deg, ${p.from}, ${p.to})` }}
+                <li key={p.name}>
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="card-hover flex h-full flex-col items-center gap-2 rounded-2xl border border-[#E8DED0] bg-white p-4 text-center shadow-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4E86BC]"
+                    aria-label={`Visit ${p.name} website`}
                   >
-                    {p.initials}
-                  </span>
-                  <span className="text-sm font-semibold text-[#1E2A38] leading-tight">{p.name}</span>
-                  <span className="text-[11px] text-[#8A939B]">{p.industry}</span>
+                    <span
+                      className="flex h-11 w-11 items-center justify-center rounded-xl text-white font-bold shadow-soft"
+                      style={{ background: `linear-gradient(135deg, ${p.from}, ${p.to})` }}
+                    >
+                      {p.initials}
+                    </span>
+                    <span className="text-sm font-semibold text-[#1E2A38] leading-tight">{p.name}</span>
+                    <span className="text-[11px] text-[#8A939B]">{p.industry}</span>
+                  </a>
                 </li>
               ))}
             </ul>

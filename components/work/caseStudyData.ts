@@ -36,7 +36,12 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Instagram & Facebook management',
       'On-site photos & short videos',
     ],
-    // Real on-site photos, before/after shots, and social posts will be added here.
-    images: [],
+    images: [
+      {
+        src: '/images/projects/peak-auto-collision/truck-before-after.png',
+        alt: 'Before and after comparison of a pickup truck body repair and refinishing project at Peak Auto Collision',
+        caption: 'Pickup truck bodywork and refinishing — before and after',
+      },
+    ],
   },
 ];
